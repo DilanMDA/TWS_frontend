@@ -2,7 +2,7 @@ import {
     CreateUser,
     User
 } from "../application/models/UserModel";
-import BaseApi from "./BaseApi";
+import BaseApi, { BaseFetchModel } from "./BaseApi";
 
 class UserApi extends BaseApi {
 
@@ -14,6 +14,9 @@ class UserApi extends BaseApi {
         return await this.getAsync<User>("users", {});
     }
 
+    public async searchUserAsync(search:string){
+        return await this.getAsync<BaseFetchModel<User>>("users/search",{search});
+    }
 }
 
 const instance = new UserApi();

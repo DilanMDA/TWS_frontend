@@ -22,6 +22,7 @@ const Header = () => {
     const [key, setKey] = useState('')
     const logout = useLogout();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const [userRole, setUserRole] = useState('');
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -48,6 +49,12 @@ const Header = () => {
             setKey(paths[1])
         }
     },[location])
+
+    useEffect(()=>{
+        if(authContext && authContext.auth.authenticated){
+            setUserRole(authContext.auth.user?.role??'')
+        }
+    },[authContext])
 
     return (
         <AppBar position="fixed">
@@ -83,13 +90,16 @@ const Header = () => {
                                 </MenuItem>
                             </Menu>
                             {authContext?.auth.authenticated?(
-                                <>
+                                <Box sx={{display:'flex', alignItems:'center'}}>
+                                    {userRole === 'admin' && (
+                                        <Button size='small' color='inherit' variant={(key === APP_ROUTES.USER_MANAGEMENT)?'outlined':undefined} onClick={()=>changeRoute(APP_ROUTES.USER_MANAGEMENT)} sx={{paddingRight:1}}>User Management</Button>
+                                    )}
                                     <IconButton size="small" onClick={handleOpenUserMenu} sx={{marginLeft:1}}>
                                         <Avatar>
                                             <UserIcon fontSize='small' />
                                         </Avatar>
                                     </IconButton>
-                                </>
+                                </Box>
                             ):(
                                 <>
                                     <Button size='small' color='inherit' variant={(key === APP_ROUTES.LOGIN)?'outlined':undefined} onClick={()=>changeRoute(APP_ROUTES.LOGIN)} sx={{paddingRight:1}}>Login</Button>

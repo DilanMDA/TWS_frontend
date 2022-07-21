@@ -36,7 +36,8 @@ import {
     BsThreeDotsVertical,
     BsImages,
     BsBookmarkCheckFill,
-    BsCameraFill
+    BsCameraFill,
+    BsStopwatch
 } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
 import { 
@@ -65,6 +66,10 @@ import { GrCertificate } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 
 import { GiSkills } from "react-icons/gi";
+
+export const WatchIcon = (props:SvgIconProps) => {
+    return (<SvgIcon {...props} inheritViewBox><BsStopwatch /></SvgIcon>)
+}
 
 export const ArrowRightIcon = (props:SvgIconProps) => {
     return (<SvgIcon {...props} inheritViewBox><MdArrowRight /></SvgIcon>)

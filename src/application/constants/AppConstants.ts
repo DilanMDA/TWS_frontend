@@ -33,3 +33,26 @@ export const PROJECT_STATUS_ARRAY = [
     PROJECT_STATUS.completed,
     PROJECT_STATUS.toBeReviewed
 ]
+
+export const PROJECT_URGENCY = {
+    urgent:{
+        title:"Urgent",
+        value:"urgent"
+    },
+    high:{
+        title:"High",
+        value:"high"
+    },
+    low:{
+        title:"Low",
+        value:"low"
+    }
+}
+
+export const PROJECT_URGENCY_ARRAY = [
+    PROJECT_URGENCY.urgent,
+    PROJECT_URGENCY.high,
+    PROJECT_URGENCY.low
+]
+
+export const DATE_FORMAT = 'DD/MM/YYYY';

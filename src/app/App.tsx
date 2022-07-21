@@ -9,6 +9,7 @@ import Signup from '../modules/signup/Signup';
 import useAuthState from '../auth/AuthHeaderHook';
 import useLoadUserData from '../auth/LoadUserDataHook';
 import Dashboard from '../modules/dashboard/Dashboard';
+import UserManagement from '../modules/userManagement/UserManagement';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path={`${APP_ROUTES.DASHBOARD}`} element={<Dashboard />} />
           <Route path={`${APP_ROUTES.LOGIN}`} element={<Login />} />
           <Route path={`${APP_ROUTES.SIGNUP}`} element={<Signup />} />
+          <Route path={`${APP_ROUTES.USER_MANAGEMENT}`} element={<UserManagement />} />
         </Routes>
       </DefaultLayout>
     </ThemeProvider>

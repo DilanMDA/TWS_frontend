@@ -14,9 +14,7 @@ const {
 const taskFormInitialValue:TaskFormModel = {
     [title.name]:title.initialValue,
     [description.name]:description.initialValue,
-    [timeAllocation.name]:timeAllocation.initialValue,
-    [urgency.name]:urgency.initialValue,
-    [status.name]:status.initialValue
+    [timeAllocation.name]:timeAllocation.initialValue
 }
 
 export default taskFormInitialValue;

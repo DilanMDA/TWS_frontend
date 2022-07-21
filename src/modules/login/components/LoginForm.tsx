@@ -60,7 +60,7 @@ const LoginForm = () => {
 
     useEffect(()=>{
         if(authContext && authContext.auth.authenticated){
-            navigate(`${APP_ROUTES.DASHBOARD}`,{replace:true});
+            navigate("/", {replace:true});
         }
     },[authContext])
 

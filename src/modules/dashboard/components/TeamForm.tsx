@@ -1,39 +1,34 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import taskFormModel from './taskForm/taskFormModel'
-import taskFormInitialValue from './taskForm/taskForminitialValue'
-import taskFormValidationSchema from './taskForm/taskFormValidationSchema'
+import React, { useEffect, useRef, useState } from 'react'
+import teamFormModel from './teamForm/teamFormModel'
+import teamFormValidationSchema from './teamForm/teamFormValidationSchema'
+import teamFormInitialValue from './teamForm/teamFormInitialValue'
 import { FormikValues, FormikHelpers, FormikProps } from 'formik';
-import { Task, TaskFormModel } from '../../../application/models/TaskModels';
 import FormTemplate from '../../../shared/FormTemplate';
 import FormikTextField from '../../../shared/formikFields/FormikTextField';
 import { CancelButton, SaveButton } from '../../../shared/Button';
+import { Team, TeamFormModel } from '../../../application/models/Team.models';
 import { Paper } from '../../../shared/Paper';
 import { Typography } from '../../../shared/Typography';
 import { Box } from '../../../shared/Box';
-import TaskApi from '../../../apis/TaskApi';
-import { AuthContext } from '../../../auth/AuthProvider';
-import FormikTimeDurationPicker from '../../../shared/formikFields/FormikTimeDurationPicker';
+import TeamApi from '../../../apis/TeamApi';
 
 const {
-    formField:{
+    formField: {
         title,
         description,
-        timeAllocation,
-        urgency,
-        status
     }
-} = taskFormModel;
+} = teamFormModel;
 
-interface TaskFormProps {
-    open:boolean;
-    task?:Task | null;
-    projectId:string;
+interface TeamFormProps {
+    open?: boolean;
+    team?: Team | null;
+    projectId: string;
     onCancel: () => void;
-    onSave:(task:Task)=>void;
+    onSave: (team: Team) => void;
 }
 
-const TaskForm = ({open, task, projectId, onCancel, onSave}:TaskFormProps) => {
-    const formikRef = useRef<FormikProps<TaskFormModel>>(null);
+const TeamForm = ({ team, open, projectId, onCancel, onSave }: TeamFormProps) => {
+    const formikRef = useRef<FormikProps<TeamFormModel>>(null);
     const [progress, setProgress] = useState(false);
 
     const handleSubmit = async (
@@ -42,12 +37,12 @@ const TaskForm = ({open, task, projectId, onCancel, onSave}:TaskFormProps) => {
     ) => {
         setProgress(true);
         try{
-            const data:TaskFormModel = {...values};
-            let response:Task|null = null;
-            if(task){
-                response = await TaskApi.baseCRUDApi.updateAsync(task.id, data);
+            const data:TeamFormModel = {...values};
+            let response:Team|null = null;
+            if(team){
+                response = await TeamApi.baseCRUDApi.updateAsync(team.id, data);
             }else{
-                response = await TaskApi.baseCRUDApi.createAsync({...data, projectId})
+                response = await TeamApi.baseCRUDApi.createAsync({...data, projectId});
             }
             onSave(response)
         }catch(error){
@@ -64,46 +59,28 @@ const TaskForm = ({open, task, projectId, onCancel, onSave}:TaskFormProps) => {
         onCancel();
     }
 
-    useEffect(()=>{
-        if(task){
-            if(formikRef.current){
-                formikRef.current.setFieldValue(
-                    title.name,
-                    task.title
-                )
-                formikRef.current.setFieldValue(
-                    timeAllocation.name,
-                    task.timeAllocation
-                )
-                formikRef.current.setFieldValue(
-                    description.name,
-                    task.description
-                )
-            }
-        }else{
+    useEffect(() => {
+        if (team) {
+
+        } else {
             formikRef.current?.resetForm();
         }
-    },[task, open])
+    }, [team])
 
     return (
         <Paper sx={{ maxWidth: '400px', minWidth: '350px', padding: 1 }}>
-            <Typography fontSize={18} fontWeight={700}>Task</Typography>
+            <Typography fontSize={18} fontWeight={700}>Team</Typography>
             <FormTemplate
                 formikRef={formikRef}
-                initialValues={taskFormInitialValue}
-                validationSchema={taskFormValidationSchema}
+                initialValues={teamFormInitialValue}
+                validationSchema={teamFormValidationSchema}
                 onSubmit={handleSubmit}
                 onChange={onFormChange}
             >
-                <Box sx={{marginTop:1}} >
+                <Box sx={{ marginTop: 1 }} >
                     <FormikTextField
                         name={title.name}
                         label={title.label}
-                        textFieldProps={{ size: 'small', fullWidth: true, sx: { marginBottom: 2 } }}
-                    />
-                    <FormikTimeDurationPicker 
-                        name={timeAllocation.name}
-                        label={timeAllocation.label}
                         textFieldProps={{ size: 'small', fullWidth: true, sx: { marginBottom: 2 } }}
                     />
                     <FormikTextField
@@ -132,4 +109,4 @@ const TaskForm = ({open, task, projectId, onCancel, onSave}:TaskFormProps) => {
     )
 }
 
-export default TaskForm
+export default TeamForm
