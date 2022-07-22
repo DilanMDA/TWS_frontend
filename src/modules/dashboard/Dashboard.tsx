@@ -182,7 +182,7 @@ const Dashboard = () => {
         if(userRole){
             getMyProjects();
         }
-    },[userRole])
+    },[userRole,authContext])
 
     useEffect(()=>{
         if(selectedProject){

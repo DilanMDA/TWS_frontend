@@ -12,6 +12,8 @@ import FormTemplate from "../../../shared/FormTemplate";
 import { Box } from "../../../shared/Box";
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import UserApi from "../../../apis/UserApi";
+import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../../application/constants/AppRoutes";
 
 const {
     formField: {
@@ -28,6 +30,7 @@ const SignupForm = () => {
     const formikRef = useRef<FormikProps<CreateUser>>(null);
     const [progress, setProgress] = useState(false);
     const [role, setRole] = useState(signupFormInitialValue.role)
+    const navigate = useNavigate();
 
     const handleSubmit = async (
         values: FormikValues,
@@ -36,7 +39,7 @@ const SignupForm = () => {
         setProgress(true)
         const data: CreateUser = { ...values, role };
         const createdUser = await UserApi.createUserAsync(data);
-        console.log(createdUser);
+        navigate(APP_ROUTES.LOGIN, {replace:true});
     }
 
     const onFormChange = (formik: FormikProps<FormikValues>) => {

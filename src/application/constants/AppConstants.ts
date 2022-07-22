@@ -55,4 +55,25 @@ export const PROJECT_URGENCY_ARRAY = [
     PROJECT_URGENCY.low
 ]
 
+export const USER_ROLES = {
+    teamMember:{
+        title:"Team Member",
+        value:"teamMember"
+    },
+    projectManager:{
+        title:"Project Manager",
+        value:"projectManager"
+    },
+    admin:{
+        title:"Admin",
+        value:"admin"
+    }
+}
+
+export const USER_ROLES_ARRAY = [
+    USER_ROLES.teamMember,
+    USER_ROLES.projectManager,
+    USER_ROLES.admin
+]
+
 export const DATE_FORMAT = 'DD/MM/YYYY';
