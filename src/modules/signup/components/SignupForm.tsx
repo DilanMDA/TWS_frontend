@@ -39,7 +39,7 @@ const SignupForm = () => {
         setProgress(true)
         const data: CreateUser = { ...values, role };
         const createdUser = await UserApi.createUserAsync(data);
-        navigate(APP_ROUTES.LOGIN, {replace:true});
+        navigate(`/${APP_ROUTES.LOGIN}`);
     }
 
     const onFormChange = (formik: FormikProps<FormikValues>) => {

@@ -60,7 +60,8 @@ const LoginForm = () => {
 
     useEffect(()=>{
         if(authContext && authContext.auth.authenticated){
-            navigate("/", {replace:true});
+            window.location.replace("/");
+            //navigate("/", {replace:true});
         }
     },[authContext])
 
